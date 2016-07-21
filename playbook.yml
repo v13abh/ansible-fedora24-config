@@ -27,10 +27,10 @@
         - kernel-headers
         - kernel-devel
         - dkms
-    - name: Add the public key
+    - name: Add VirtualBox Repo Public Key
       rpm_key: state=present key=https://www.virtualbox.org/download/oracle_vbox.asc
 
-    - name: Add the repository
+    - name: Add VirtualBox Repo
       yum_repository:
         file: virtualbox
         name: virtualbox
@@ -41,7 +41,7 @@
         repo_gpgcheck: yes
         gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
     
-    - name: Install virtualbox
+    - name: Install VirtualBox 5.0
       dnf: name=VirtualBox-5.0 state=latest
 
     - name: Get the current linux version
@@ -56,12 +56,12 @@
         content: |
           export KERN_DIR=/usr/src/kernels/{{ uname_output.stdout }}
       become: true
-      become_user: ccone
+      become_user: vagrant
 
     - name: Load vboxdrv kernel module
       command: /sbin/rcvboxdrv setup
 
-    - name: Install Vagrant and dependencies
+    - name: Install Vagrant and Dependencies
       package: name={{ item }} state=present
       with_items:
         - vagrant
@@ -80,15 +80,6 @@
     - name: Install Git
       package: name=git state=present
 
-    - name: Clone Liquid Prompt
-      git:
-        repo: https://github.com/nojhan/liquidprompt.git 
-        dest: ~/.liquidprompt
-      
-    - name: Enable Liquid Prompt
-      command: source .liquidprompt/liquidprompt
-
-
  
     - name: Install RPMFusion repository
       yum_repository:
@@ -101,4 +92,15 @@
       with_items:
         - vlc
         - vim-enhanced
+
+    - name: Clone Liquid Prompt using Git
+      become: true
+      become_user: vagrant
+      git:
+        repo: https://github.com/nojhan/liquidprompt
+        dest: ~/liquidprompt
         
+    - name: Enable Liquid Prompt
+      become: true
+      become_user: vagrant
+      command: source liquidprompt/liquidprompt
