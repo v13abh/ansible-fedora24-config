@@ -1,0 +1,81 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  become_user: root
+  vars:
+    download_path: "{{ lookup('env','HOME') }}/Downloads"
+  
+  tasks:
+    - name: Install Python2 so DNF works with Vagrant
+      package: name={{ item }} state=present 
+      with_items:
+        - python2 
+        - python2-dnf
+        - python-pip
+
+    - name: Install VirtualBox Dependencies
+      package: name={{ item }} state=present
+      with_items:
+        - binutils
+        - gcc
+        - make
+        - patch
+        - libgomp
+        - glibc-headers
+        - glibc-devel
+        - kernel-headers
+        - kernel-devel
+        - dkms
+    - name: Install VirtualBox repository
+      yum_repository:
+        name: VirtualBox
+        description: VirtualBox Repo
+        file: external_repos
+        baseurl: http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+ #   - name: Install VirtualBox
+ #     command: dnf install -y VirtualBox-5.0
+ #   - name: Add username to vboxusers group
+ #     command: usermod -a -G vboxusers vagrant
+ 
+    - name: Install Vagrant and dependencies
+      package: name={{ item }} state=present
+      with_items:
+        - vagrant
+        - ruby-devel
+        - redhat-rpm-config
+        - zlib-devel
+
+    - name: Install Vagrant Cachier
+      command: vagrant plugin install vagrant-cachier
+    - name: Install Vagrant Hostmanager
+      command: vagrant plugin install vagrant-hostmanager
+
+    - name: Install Ansible
+      package: name=ansible state=present
+
+    - name: Install Git
+      package: name=git state=present
+
+    - name: Clone Liquid Prompt
+      git:
+        repo: https://github.com/nojhan/liquidprompt.git 
+        dest: ~/.liquidprompt
+      
+    - name: Enable Liquid Prompt
+      command: source .liquidprompt/liquidprompt
+
+
+ 
+    - name: Install RPMFusion repository
+      yum_repository:
+        name: RPMFusion
+        description: RPMFusion Repo
+        file: external_repos
+        baseurl: http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
+    - name: Install Utilities
+      dnf: name={{ item }} state=latest
+      with_items:
+        - vlc
+        - vim-enhanced
+        
