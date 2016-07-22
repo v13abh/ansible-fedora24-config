@@ -83,7 +83,10 @@
       command: vagrant plugin install vagrant-hostmanager
 
     - name: Set VirtualBox as Default Provider for Vagrant
-      command: echo "export VAGRANT_DEFAULT_PROVIDER=virtualbox" >> ~/.bashrc
+      blockinfile: 
+        dest: ~/.bashrc
+        content: |
+          export VAGRANT_DEFAULT_PROVIDER=virtualbox
       become: true
       become_user: "{{ username }}"
 
