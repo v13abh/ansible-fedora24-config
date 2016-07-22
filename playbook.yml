@@ -91,7 +91,7 @@
       shell: source /home/"{{ username}}"/.bashrc
 
     - name: Load vboxdrv Kernel Module
-      raw: /usr/lib/virtualbox/vboxdrv.sh setup
+      raw: sudo /usr/lib/virtualbox/vboxdrv.sh setup
 
     - name: Install RPMFusion Repository
       dnf: name=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm state=present
