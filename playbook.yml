@@ -64,7 +64,7 @@
       become_user: "{{ username }}"
 
     - name: Load vboxdrv Kernel Module
-      command: /sbin/rcvboxdrv setup
+      command: /usr/lib/virtualbox/vboxdrv.sh setup
 
     - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
       command: /usr/lib/virtualbox/vboxdrv.sh setup
