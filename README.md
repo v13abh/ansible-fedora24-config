@@ -6,17 +6,13 @@ First, we need to update using DNF:
 
     dnf update -y
 
-Next, we need to install Git:
-
-    dnf install git
-
 Next, we need to clone this repo:
 
     git clone git://github.com/v13abh/ansible-fedora24-config
 
-In order to get Ansible to play nice with DNF we also need to install Python:
+In order to get Ansible to play nice with DNF we also need to install python2-dnf:
 
-    dnf install python2
+    dnf install python2-dnf
 
 Finally, we need to install Ansible:
 
