@@ -79,14 +79,7 @@
       command: vagrant plugin install vagrant-hostmanager
 
     - name: Install RPMFusion repository
-      yum_repository:
-        name: RPMFusion
-        description: RPMFusion Repo
-        file: external_repos
-        baseurl: http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
-
-    - name: Update Cache
-      command: dnf update -y
+      command: rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
     
     - name: Install Utilities
       package: name={{ item }} state=present
