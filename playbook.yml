@@ -1,8 +1,8 @@
 ---
-- name: This Ansible Playbook will configure Fedora 24 as DevOps Workstation
 - hosts: 127.0.0.1
   connection: local
   become: true
+- name: This Ansible Playbook will configure Fedora 24 as DevOps Workstation
   vars:
     download_path: "{{ lookup('env','HOME') }}/Downloads"
   vars_prompt:
