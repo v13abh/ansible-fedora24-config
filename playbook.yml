@@ -86,7 +86,7 @@
         baseurl: http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
     
     - name: Install Utilities
-      package: name={{ item }} state=latest
+      package: name={{ item }} state=present
       with_items:
         - tmux
         - vim-enhanced
