@@ -91,7 +91,7 @@
       become_user: "{{ username }}"
 
     - name: Source .bashrc
-      command: source /home/"{{ username}}"/.bashrc
+      shell: source /home/"{{ username}}"/.bashrc
 
     - name: Install RPMFusion Repository
       dnf: name=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm state=present
