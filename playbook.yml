@@ -66,6 +66,9 @@
     - name: Load vboxdrv Kernel Module
       command: /sbin/rcvboxdrv setup
 
+    - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
+      command: /usr/lib/virtualbox/vboxdrv.sh setup
+
     - name: Install Vagrant and Dependencies
       package: name={{ item }} state=present
       with_items:
@@ -78,6 +81,11 @@
       command: vagrant plugin install vagrant-cachier
     - name: Install Vagrant Hostmanager Plugin
       command: vagrant plugin install vagrant-hostmanager
+
+    - name: Set VirtualBox as Default Provider for Vagrant
+      command: echo "export VAGRANT_DEFAULT_PROVIDER=virtualbox" >> ~/.bashrc
+      become: true
+      become_user: "{{ username }}"
 
     - name: Install RPMFusion Repository
       dnf: name=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm state=present

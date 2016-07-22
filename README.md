@@ -12,11 +12,11 @@ Next, we need to clone this repo:
 
 In order to get Ansible to play nice with DNF we also need to install python2-dnf:
 
-    dnf install python2-dnf
+    dnf install python2-dnf -y
 
 Finally, we need to install Ansible:
 
-    dnf install ansible
+    dnf install ansible -y
 
 ### Deploy
 
