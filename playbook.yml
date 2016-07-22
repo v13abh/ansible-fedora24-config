@@ -85,8 +85,8 @@
         file: external_repos
         baseurl: http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
 
-    - name: Update DNF Cache
-      dnf: update_cache=yes
+    - name: Update Cache
+      yum: update_cache=yes
     
     - name: Install Utilities
       package: name={{ item }} state=present
