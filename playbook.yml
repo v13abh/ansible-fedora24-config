@@ -80,30 +80,16 @@
     - name: Install Ansible
       package: name=ansible state=present
 
-    - name: Install Git
-      package: name=git state=present
-
-
     - name: Install RPMFusion repository
       yum_repository:
         name: RPMFusion
         description: RPMFusion Repo
         file: external_repos
         baseurl: http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
+    
     - name: Install Utilities
       dnf: name={{ item }} state=latest
       with_items:
-        - vlc
+        - tmux
         - vim-enhanced
-
-    - name: Clone Liquid Prompt using Git
-      become: true
-      become_user: "{{ username }}"
-      git:
-        repo: https://github.com/nojhan/liquidprompt
-        dest: ~/liquidprompt
-
-    - name: Enable Liquid Prompt
-      become: true
-      become_user: "{{ username }}"
-      command: source ~/liquidprompt/liquidprompt
+        - vlc
