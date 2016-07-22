@@ -1,16 +1,19 @@
 ---
-- hosts: all
+- hosts: 127.0.0.1
+  connection: local
   become: true
-  become_method: sudo
-  become_user: root
   vars:
     download_path: "{{ lookup('env','HOME') }}/Downloads"
-  
+  vars_prompt:
+    - name: username
+      prompt: "What is your username?"
+      private: no
+
   tasks:
-    - name: Install Python2 so DNF works with Vagrant
-      package: name={{ item }} state=present 
+    - name: Install Python2
+      package: name={{ item }} state=present
       with_items:
-        - python2 
+        - python2
         - python2-dnf
         - python-pip
 
@@ -40,7 +43,7 @@
         gpgcheck: yes
         repo_gpgcheck: yes
         gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
-    
+
     - name: Install VirtualBox 5.0
       dnf: name=VirtualBox-5.0 state=latest
 
@@ -49,14 +52,14 @@
       register: uname_output
 
     - debug: var=uname_output
- 
+
     - name: Set the environment varible KERN_DIR
       blockinfile:
         dest: ~/.bashrc
         content: |
           export KERN_DIR=/usr/src/kernels/{{ uname_output.stdout }}
       become: true
-      become_user: vagrant
+      become_user: "{{ username }}"
 
     - name: Load vboxdrv kernel module
       command: /sbin/rcvboxdrv setup
@@ -80,7 +83,7 @@
     - name: Install Git
       package: name=git state=present
 
- 
+
     - name: Install RPMFusion repository
       yum_repository:
         name: RPMFusion
@@ -95,12 +98,12 @@
 
     - name: Clone Liquid Prompt using Git
       become: true
-      become_user: vagrant
+      become_user: "{{ username }}"
       git:
         repo: https://github.com/nojhan/liquidprompt
         dest: ~/liquidprompt
-        
+
     - name: Enable Liquid Prompt
       become: true
-      become_user: vagrant
-      command: source liquidprompt/liquidprompt
+      become_user: "{{ username }}"
+      command: source ~/liquidprompt/liquidprompt
