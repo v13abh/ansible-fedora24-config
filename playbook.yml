@@ -75,9 +75,9 @@
         - redhat-rpm-config
         - zlib-devel
 
-    - name: Install Vagrant Plugin: Cachier
+    - name: Install Vagrant Cachier Plugin
       command: vagrant plugin install vagrant-cachier
-    - name: Install Vagrant Plugin: Hostmanager
+    - name: Install Vagrant Hostmanager Plugin
       command: vagrant plugin install vagrant-hostmanager
 
     - name: Install RPMFusion Repository
