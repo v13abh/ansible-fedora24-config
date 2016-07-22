@@ -1,4 +1,5 @@
 ---
+- name: This Ansible Playbook will configure Fedora 24 as DevOps Workstation
 - hosts: 127.0.0.1
   connection: local
   become: true
@@ -10,7 +11,7 @@
       private: no
 
   tasks:
-    - name: Check to ensure Python dependencies are installed
+    - name: Check to Ensure Python Dependencies are Installed
       package: name={{ item }} state=present
       with_items:
         - python2
@@ -31,10 +32,11 @@
         - kernel-headers
         - kernel-devel
         - dkms
-    - name: Add VirtualBox Repo Public Key
+
+    - name: Add VirtualBox Repository Public Key
       rpm_key: state=present key=https://www.virtualbox.org/download/oracle_vbox.asc
 
-    - name: Add VirtualBox Repo
+    - name: Add VirtualBox Repository
       yum_repository:
         file: virtualbox
         name: virtualbox
@@ -48,13 +50,13 @@
     - name: Install VirtualBox 5.0
       dnf: name=VirtualBox-5.0 state=latest
 
-    - name: Get the current linux version
+    - name: Get Current Linux Kernel Version
       command: uname -r
       register: uname_output
 
     - debug: var=uname_output
 
-    - name: Set the environment varible KERN_DIR
+    - name: Set Environment Variable KERN_DIR
       blockinfile:
         dest: ~/.bashrc
         content: |
@@ -62,7 +64,7 @@
       become: true
       become_user: "{{ username }}"
 
-    - name: Load vboxdrv kernel module
+    - name: Load vboxdrv Kernel Module
       command: /sbin/rcvboxdrv setup
 
     - name: Install Vagrant and Dependencies
@@ -73,12 +75,12 @@
         - redhat-rpm-config
         - zlib-devel
 
-    - name: Install Vagrant Cachier
+    - name: Install Vagrant Plugin: Cachier
       command: vagrant plugin install vagrant-cachier
-    - name: Install Vagrant Hostmanager
+    - name: Install Vagrant Plugin: Hostmanager
       command: vagrant plugin install vagrant-hostmanager
 
-    - name: Install RPMFusion repository
+    - name: Install RPMFusion Repository
       dnf: name=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm state=present
     
     - name: Install Optional Utilities
@@ -88,10 +90,18 @@
         - vim-enhanced
         - vlc
         - gnome-tweak-tool
+        - guake
 
-    - name: Install Google Chrome Rpo
+    - name: Install Google Chrome Repository
       command: >
         cp ./files/google-chrome.repo /etc/yum.repos.d/
 
-    - name: Install Google Chrome
+    - name: Install Google Chrome Browser
       package: name=google-chrome-stable state=present
+
+    - name: Install Hipchat Repository
+      command: >
+        cp ./files/hipchat.repo /etc/yum.repos.d/
+
+    - name: Install Hipchat
+      package: name=hipchat4 state=present
