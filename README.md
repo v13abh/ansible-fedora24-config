@@ -2,7 +2,11 @@
 
 ### Prerequisites
 
-First, we need to install Git:
+First, we need to update using DNF:
+
+    dnf update -y
+
+Next, we need to install Git:
 
     dnf install git
 
@@ -20,7 +24,7 @@ Finally, we need to install Ansible:
 
 ### Deploy
 
-Next we change to the cloned directory and deploy the playbook with th -K switch so we are prompted for our SUDO password:
+Now we can change to the cloned directory and deploy the playbook with th -K switch so we are prompted for our SUDO password:
 
     ansible-playbook playbook.yml -K
 
