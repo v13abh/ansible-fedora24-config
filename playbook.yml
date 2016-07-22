@@ -77,9 +77,6 @@
     - name: Install Vagrant Hostmanager
       command: vagrant plugin install vagrant-hostmanager
 
-    - name: Install Ansible
-      package: name=ansible state=present
-
     - name: Install RPMFusion repository
       yum_repository:
         name: RPMFusion
