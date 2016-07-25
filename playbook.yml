@@ -126,3 +126,6 @@
 
     - name: In order to complete this deployment, this system will reboot in 5 seconds. Have a nice day!
       pause: seconds=5
+
+    - name: Rebooting system!
+      command: /sbin/reboot 
