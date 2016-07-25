@@ -44,11 +44,11 @@
         baseurl: http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch
         enabled: yes
         gpgcheck: yes
-        repo_gpgcheck: yes
+        repo_gpgcheck: no
         gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
 
-    - name: Wait 5 seconds to let Fedora catch its breath
-      pause: seconds=5
+#    - name: Wait 5 seconds to let Fedora catch its breath
+#      pause: seconds=5
 
     - name: Install VirtualBox 5.0
       dnf: name=VirtualBox-5.0 state=latest
@@ -66,10 +66,10 @@
       become_user: "{{ local_username.stdout }}"
 
     - name: Source .bashrc
-      shell: . /home/{{ local_username.stdout}}/.bashrc && sudo /usr/lib/virtualbox/vboxdrv.sh setup
+      shell: ". /home/{{ local_username.stdout}}/.bashrc"
 
-#    - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
-#      command: /usr/lib/virtualbox/vboxdrv.sh setup
+    - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
+      command: /usr/lib/virtualbox/vboxdrv.sh setup
 
     - name: Install Vagrant and Dependencies
       package: name={{ item }} state=present
@@ -93,10 +93,10 @@
       become_user: "{{ local_username.stdout }}"
 
     - name: Source .bashrc
-      shell: . /home/{{ local_username.stdout}}/.bashrc && sudo /usr/lib/virtualbox/vboxdrv.sh setup
+      shell: ". /home/{{ local_username.stdout}}/.bashrc"
 
-#    - name: Load vboxdrv Kernel Module
-#      raw: sudo /usr/lib/virtualbox/vboxdrv.sh setup
+    - name: Load vboxdrv Kernel Module
+      raw: sudo /usr/lib/virtualbox/vboxdrv.sh setup
 
     - name: Install RPMFusion Repository
       dnf: name=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm state=present
@@ -123,3 +123,6 @@
 
     - name: Install Hipchat
       package: name=hipchat4 state=present
+
+    - name: In order to complete this deployment, this system will reboot in 5 seconds. Have a nice day!
+      pause: seconds=5
