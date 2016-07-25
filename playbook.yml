@@ -87,7 +87,7 @@
       become_user: "{{ local_username.stdout }}"
 
     - name: Source .bashrc
-      shell: source /home/"{{local_username.std}}"/.bashrc
+      shell: source /home/"{{ local_username.stdout}}"/.bashrc
 
     - name: Load vboxdrv Kernel Module
       raw: sudo /usr/lib/virtualbox/vboxdrv.sh setup
