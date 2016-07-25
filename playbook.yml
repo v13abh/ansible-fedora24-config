@@ -47,6 +47,9 @@
         repo_gpgcheck: yes
         gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
 
+    - name: Wait 5 seconds to let Fedora catch its breath
+      pause: seconds=5
+
     - name: Install VirtualBox 5.0
       dnf: name=VirtualBox-5.0 state=latest
 
