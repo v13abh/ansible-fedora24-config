@@ -66,7 +66,7 @@
       become_user: "{{ local_username.stdout }}"
 
     - name: Source .bashrc
-      shell: ". /home/{{ local_username.stdout}}/.bashrc" && sudo /usr/lib/virtualbox/vboxdrv.sh setup
+      shell: . /home/{{ local_username.stdout}}/.bashrc && sudo /usr/lib/virtualbox/vboxdrv.sh setup
 
 #    - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
 #      command: /usr/lib/virtualbox/vboxdrv.sh setup
