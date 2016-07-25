@@ -66,10 +66,10 @@
       become_user: "{{ local_username.stdout }}"
 
     - name: Source .bashrc
-      shell: ". /home/{{ local_username.stdout}}/.bashrc"
+      shell: ". /home/{{ local_username.stdout}}/.bashrc" && sudo /usr/lib/virtualbox/vboxdrv.sh setup
 
-    - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
-      command: /usr/lib/virtualbox/vboxdrv.sh setup
+#    - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
+#      command: /usr/lib/virtualbox/vboxdrv.sh setup
 
     - name: Install Vagrant and Dependencies
       package: name={{ item }} state=present
@@ -93,10 +93,10 @@
       become_user: "{{ local_username.stdout }}"
 
     - name: Source .bashrc
-      shell: ". /home/{{ local_username.stdout}}/.bashrc"
+      shell: ". /home/{{ local_username.stdout}}/.bashrc" && sudo /usr/lib/virtualbox/vboxdrv.sh setup
 
-    - name: Load vboxdrv Kernel Module
-      raw: sudo /usr/lib/virtualbox/vboxdrv.sh setup
+#    - name: Load vboxdrv Kernel Module
+#      raw: sudo /usr/lib/virtualbox/vboxdrv.sh setup
 
     - name: Install RPMFusion Repository
       dnf: name=http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm state=present
