@@ -4,12 +4,13 @@
   become: true
   vars:
     download_path: "{{ lookup('env','HOME') }}/Downloads"
-  vars_prompt:
-    - name: username
-      prompt: "What is your username?"
-      private: no
 
   tasks:
+    - name: Getting Username
+      command: whoami
+      register: local_username
+      bcome: no
+
     - name: Check to Ensure Python Dependencies are Installed
       package: name={{ item }} state=present
       with_items:
@@ -53,15 +54,13 @@
       command: uname -r
       register: uname_output
 
-    - debug: var=uname_output
-
     - name: Set Environment Variable KERN_DIR
       blockinfile:
         dest: ~/.bashrc
         content: |
           export KERN_DIR=/usr/src/kernels/{{ uname_output.stdout }}
       become: true
-      become_user: "{{ username }}"
+      become_user: "{{ local_username.std }}"
 
     - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
       command: /usr/lib/virtualbox/vboxdrv.sh setup
@@ -85,10 +84,10 @@
         content: |
           export VAGRANT_DEFAULT_PROVIDER=virtualbox
       become: true
-      become_user: "{{ username }}"
+      become_user: "{{ local_username.std }}"
 
     - name: Source .bashrc
-      shell: source /home/"{{ username}}"/.bashrc
+      shell: source /home/"{{local_username.std}}"/.bashrc
 
     - name: Load vboxdrv Kernel Module
       raw: sudo /usr/lib/virtualbox/vboxdrv.sh setup
