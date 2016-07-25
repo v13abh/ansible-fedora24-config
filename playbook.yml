@@ -9,7 +9,7 @@
     - name: Getting Username
       command: whoami
       register: local_username
-      bcome: no
+      become: no
 
     - name: Check to Ensure Python Dependencies are Installed
       package: name={{ item }} state=present
