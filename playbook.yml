@@ -60,7 +60,7 @@
         content: |
           export KERN_DIR=/usr/src/kernels/{{ uname_output.stdout }}
       become: true
-      become_user: "{{ local_username.std }}"
+      become_user: "{{ local_username.stdout }}"
 
     - name: Fix Oracle's Problem with SELinux so VirtualBox Will Run
       command: /usr/lib/virtualbox/vboxdrv.sh setup
@@ -84,7 +84,7 @@
         content: |
           export VAGRANT_DEFAULT_PROVIDER=virtualbox
       become: true
-      become_user: "{{ local_username.std }}"
+      become_user: "{{ local_username.stdout }}"
 
     - name: Source .bashrc
       shell: source /home/"{{local_username.std}}"/.bashrc
