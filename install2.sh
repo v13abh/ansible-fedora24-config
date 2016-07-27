@@ -8,8 +8,5 @@ cd ~/ansible-fedora24-config
 
 ansible-playbook playbook.yml -K
 
-# sudo chkconfig --del install2.sh
-
-# sudo rm -f /etc/init.d/install2.sh
-
+sed -i '/. ~/ansible-fedora24-config/install2.sh' ~/.bashrc
  
