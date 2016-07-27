@@ -6,6 +6,8 @@ sudo dnf install python2-dnf -y
 
 sudo dnf install ansible -y                                                                                                      
 
-gnome-terminal -e ansible-playbook playbook.yml -K  
+cd ~/ansible-fedora24-config
 
- 
+ansible-playbook playbook.yml -K  
+
+read line 
