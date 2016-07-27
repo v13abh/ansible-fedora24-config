@@ -6,5 +6,7 @@ echo '. ~/ansible-fedora24-config/install2.sh' >> ~/.bashrc
 
 sudo dnf update -y
 
-# sudo reboot
+read -p "Your system will now reboot. Press [ENTER] key to continue..."
+
+sudo reboot
 
