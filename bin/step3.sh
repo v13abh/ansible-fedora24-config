@@ -10,4 +10,8 @@ cd ~/ansible-fedora24-config
 
 ansible-playbook playbook.yml -K  
 
-read line 
+
+
+read -p "We are now ready for a final reboot to complete the deployment process. Press [ENTER] to continue..."
+
+sudo reboot

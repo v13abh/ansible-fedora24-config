@@ -2,7 +2,7 @@
 # 
 # description: Script to deploy Fedora 24 as DevOps workstation
 
-echo '. ~/ansible-fedora24-config/install2.sh' >> ~/.bash_profile
+echo '. ~/ansible-fedora24-config/bin/step2.sh' >> ~/.bash_profile
 
 sudo dnf update -y
 

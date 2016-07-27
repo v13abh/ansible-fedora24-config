@@ -47,9 +47,6 @@
         repo_gpgcheck: no
         gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
 
-#    - name: Wait 5 seconds to let Fedora catch its breath
-#      pause: seconds=5
-
     - name: Install VirtualBox 5.0
       dnf: name=VirtualBox-5.0 state=latest
 
@@ -79,10 +76,10 @@
         - redhat-rpm-config
         - zlib-devel
 
-    - name: Install Vagrant Cachier Plugin
-      command: vagrant plugin install vagrant-cachier
-    - name: Install Vagrant Hostmanager Plugin
-      command: vagrant plugin install vagrant-hostmanager
+  #  - name: Install Vagrant Cachier Plugin
+  #    command: vagrant plugin install vagrant-cachier
+  #  - name: Install Vagrant Hostmanager Plugin
+  #    command: vagrant plugin install vagrant-hostmanager
 
     - name: Set VirtualBox as Default Provider for Vagrant
       blockinfile: 
@@ -123,9 +120,3 @@
 
     - name: Install Hipchat
       package: name=hipchat4 state=present
-
-    - name: In order to complete this deployment, this system will reboot in 5 seconds. Have a nice day!
-      pause: seconds=5
-
-    - name: Rebooting system!
-      command: /sbin/reboot 
