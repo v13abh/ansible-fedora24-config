@@ -6,4 +6,6 @@ sudo dnf install python2-dnf -y
 
 sudo dnf install ansible -y                                                                                                      
 
-ansible-playbook playbook.yml -K   
+gnome-terminal -e ansible-playbook playbook.yml -K  
+
+ 

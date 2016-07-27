@@ -2,16 +2,11 @@
 
 sed -i '/. ~\/ansible-fedora24-config\/install2.sh/d' ~/.bash_profile
 
-sleep 15s
+sleep 20s
 
-gnome-terminal -e ~/ansible-fedora24-config/install3.sh
+gnome-terminal -e ~/ansible-fedora24-config/install3.shi
 
-# sudo dnf install python2-dnf -y
+read line
 
-# sudo dnf install ansible -y
-
-# cd ~/ansible-fedora24-config
-
-# ansible-playbook playbook.yml -K
 
  
