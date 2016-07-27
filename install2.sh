@@ -1,5 +1,4 @@
 #!/bin/bash
-# chkconfig: 345 99 10
 
 sudo dnf install python2-dnf -y
 
@@ -9,8 +8,8 @@ cd ~/ansible-fedora24-config
 
 ansible-playbook playbook.yml -K
 
-sudo chkconfig --del install2.sh
+# sudo chkconfig --del install2.sh
 
-sudo rm -f /etc/init.d/install2.sh
+# sudo rm -f /etc/init.d/install2.sh
 
  
