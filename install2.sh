@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sed -i '/. ~\/ansible-fedora24-config\/install2.sh' ~/.bashrc
+sed -i '/. ~\/ansible-fedora24-config\/install2.sh/d' ~/.bashrc
 
 sudo dnf install python2-dnf -y
 
