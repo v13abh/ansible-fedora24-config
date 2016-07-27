@@ -1,14 +1,14 @@
 #!/bin/bash
+# 
+# description: Script to deploy Fedora 24 as DevOps workstation
 
-# Script to deploy Fedora 24 as DevOps workstation
-
-sudo chkconfig --remove install2.sh
+# sudo chkconfig --del install2.sh
 
 sudo cp ~/ansible-fedora24-config/install2.sh /etc/init.d/
 
 sudo chmod +x /etc/init.d/install2.sh
 
-sudo chkconfig --level 2345 install2.sh on
+sudo chkconfig install2.sh on
 
 sudo dnf update -y
 
