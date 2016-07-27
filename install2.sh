@@ -9,3 +9,9 @@ sudo dnf install ansible -y
 cd ~/ansible-fedora24-config
 
 ansible-playbook playbook.yml -K
+
+sudo chkconfig --remove install2.sh
+
+sudo rm -f /etc/init.d/install2.sh
+
+ 
