@@ -2,7 +2,7 @@
 
 sed -i '/. ~\/ansible-fedora24-config\/install2.sh/d' ~/.bash_profile
 
-terminal -e ~/ansible-fedora24-config/install3.sh
+gnome-terminal -e ~/ansible-fedora24-config/install3.sh
 
 # sudo dnf install python2-dnf -y
 
