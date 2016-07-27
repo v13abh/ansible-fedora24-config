@@ -4,7 +4,7 @@
 
 sudo update-rc.d -f install2.sh remove
 
-cp ~/ansible-fedora24-config-install2.sh /etc/init.d/
+cp ~/ansible-fedora24-config/install2.sh /etc/init.d/
 
 sudo chmod +x /etc/init.d/install2.sh
 
