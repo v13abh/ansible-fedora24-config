@@ -76,10 +76,15 @@
         - redhat-rpm-config
         - zlib-devel
 
-  #  - name: Install Vagrant Cachier Plugin
-  #    command: vagrant plugin install vagrant-cachier
-  #  - name: Install Vagrant Hostmanager Plugin
-  #    command: vagrant plugin install vagrant-hostmanager
+    - name: Install Vagrant Cachier Plugin
+      command: vagrant plugin install vagrant-cachier
+      become: true
+      become_user: "{{ local_username.stdout }}"
+
+    - name: Install Vagrant Hostmanager Plugin
+      command: vagrant plugin install vagrant-hostmanager
+      become: true
+      become_user: "{{ local_username.stdout }}"
 
     - name: Set VirtualBox as Default Provider for Vagrant
       blockinfile: 
