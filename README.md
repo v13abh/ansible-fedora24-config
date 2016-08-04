@@ -2,15 +2,11 @@
 
 ### Prerequisites
 
-First, we need to update using DNF and then reboot:
-
-    sudo dnf update -y && sudo reboot
-
-Next, we need to clone this repo:
+First, we need to clone this repo:
 
     git clone git://github.com/v13abh/ansible-fedora24-config
 
-In order to get Ansible to play nice with DNF we also need to install python2-dnf:
+Next, we need to install python2-dnf so that Ansible will play nice with DNF:
 
     sudo dnf install python2-dnf -y
 
@@ -24,3 +20,6 @@ Now we can change to the cloned directory and deploy the playbook with th -K swi
 
     ansible-playbook playbook.yml -K
 
+### Note
+
+Your system will reboot twice and will continue the deployment after the first reboot. You will also be prompted for your SUDO password a couple of different times during the process.
