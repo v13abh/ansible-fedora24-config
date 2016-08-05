@@ -16,9 +16,9 @@ Finally, we need to install Ansible:
 
 ### Deploy
 
-Now we can change to the cloned directory and deploy the playbook with th -K switch so we are prompted for our SUDO password:
+Now we can change to the cloned directory and execute the install script. 
 
-    ansible-playbook playbook.yml -K
+    ./install.sh
 
 ### Note
 
