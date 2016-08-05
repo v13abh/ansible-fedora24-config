@@ -6,13 +6,9 @@ First, we need to clone this repo:
 
     git clone git://github.com/v13abh/ansible-fedora24-config
 
-Next, we need to install python2-dnf so that Ansible will play nice with DNF:
+Next, we need to install python2-dnf so that Ansible will play nice with DNF and we also install Ansible:
 
-    sudo dnf install python2-dnf -y
-
-Finally, we need to install Ansible:
-
-    sudo dnf install ansible -y
+    sudo dnf install python2-dnf ansible -y
 
 ### Deploy
 
